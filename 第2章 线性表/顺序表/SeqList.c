@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 /*
- * 线性表
+ * 顺序表
  */
 
 typedef int ElemType;
