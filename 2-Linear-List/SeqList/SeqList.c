@@ -9,10 +9,10 @@
 typedef int ElemType;
 
 // 静态存储
-// typedef struct {
-// 	int data[MaxSize];
-// 	int length;
-// } SqList;
+typedef struct {
+	int data[MaxSize];
+	int length;
+} Sqlist;
 
 // 动态存储
 #define InitSize 10
@@ -73,6 +73,27 @@ int LocateElem(SeqList L, ElemType e) {
 	}
 	printf("找不到该元素, 查找的元素: %d\n", e);
 	return 0;
+}
+
+// 寻找顺序表中要插入的元素的位置
+int findElem(Sqlist L, int x) {
+	int i;
+	for (i = 0; i < L.length; i++) {
+		if (x < L.data[i]) {
+			return i;
+		}
+	}
+	return i;
+}
+
+void insertElem(Sqlist &L, int x) {
+	int p, i;
+	p = findElem(L, x);
+	for (i = L.length - 1; i >= p; --i) {
+		L.data[i + 1] = L.data[i];
+	}
+	L.data[p] = x;
+	++(L.length);
 }
 
 void PrintList(SeqList L) {
