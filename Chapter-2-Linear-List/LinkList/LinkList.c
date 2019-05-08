@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /*
- * 链表
+ * 单链表
  */
 
 typedef int Element;
