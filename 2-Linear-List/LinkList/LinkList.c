@@ -10,45 +10,47 @@ typedef int Element;
 typedef struct LNode {
 	Element data;
 	struct LNode *next;
-} LNode, *LinkList;
+} LNode;
 
-LinkList List_HeadInsert(LinkList L) {
+/* 头插法 */
+void List_HeadInsert(LNode **L, int a[], int n) {
 	LNode *s;
-	int x;
-	L = (LinkList) malloc(sizeof(LNode));
-	if (L == NULL) {
-		printf("头节点内存分配失败\n");
+	(*L) = (LNode*) malloc(sizeof(LNode));
+	(*L)->next = NULL;
+	for (int i = 0; i < n; i ++) {
+		s = (LNode*) malloc(sizeof(LNode));
+		s->data = a[i];
+		s->next = (*L)->next;
+		(*L)->next = s;
 	}
-	L->next = NULL;
-	scanf("%d", &x);
-	while(x != 9999) {
-		s = (LNode *) malloc(sizeof(LNode));
-		if (s == NULL) {
-			printf("内存分配失败\n");
-		}
-		s->data = x;
-		s->next = L->next;
-		L->next = s;
-		scanf("%d", &x);
-	}
-	return L;
 }
 
-void PrintList(LinkList L) {
+/* 顺序输出链表 */
+void PrintList(LNode *L) {
 	//L = L->next;
-	if (L == NULL) {
+	if (L->next == NULL) {
 		printf("链表为空\n");
 	}
-	printf("%d\n", L->data);
-	// while (L != NULL) {
-	// 	printf("%d ", L->data);
-	// 	L = L->next;
-	// }
+	while (L->next != NULL) {
+		printf("%d ", L->next->data);
+		L = L->next;
+	}
+	printf("\n");
+}
+
+/* 逆序输出链表 */
+void reprint(LNode *L) {
+	if (L != NULL) {
+		reprint(L->next);
+		printf("%d ", L->data);
+	}
 }
 
 int main() {
-	LinkList L;
-	List_HeadInsert(&L);
+	LNode *L;
+	int a[] = {1, 2, 3, 4};
+	List_HeadInsert(&L, a, 4);
 	PrintList(L);
+	reprint(L->next);
 	return 0;
 }
