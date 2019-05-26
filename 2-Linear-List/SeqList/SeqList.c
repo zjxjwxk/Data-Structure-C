@@ -32,9 +32,9 @@ int getElem(Sqlist L, int p, int *e) {
 }
 
 // 寻找顺序表中要插入的元素的位置
-int findElem(Sqlist *L, int x) {
+int findInsertIndex(Sqlist *L, int x) {
 	int i;
-	for (i = 0; i < L->length; i++) {
+	for (i = 0; i < L->length; ++i) {
 		if (x < L->data[i]) {
 			return i;
 		}
@@ -42,15 +42,28 @@ int findElem(Sqlist *L, int x) {
 	return i;
 }
 
+int findElem(Sqlist *L, int e) {
+	int i;
+	for (i = 0; i < L->length; ++i) {
+		if (e == L->data[i]) {
+			return i;
+		}
+	}
+	return -1;
+}
+
 // 在顺序表L的第p个位置上插入新的元素e
-void insertElem(Sqlist *L, int x) {
-	int p, i;
-	p = findElem(L, x);
+int insertElem(Sqlist *L, int p, int e) {
+	int i;
+	if (p < 0 || p > L->length || L->length == MaxSize1) {
+		return 0;
+	}
 	for (i = L->length - 1; i >= p; --i) {
 		L->data[i + 1] = L->data[i];
 	}
-	L->data[p] = x;
+	L->data[p] = e;
 	++(L->length);
+	return 1;
 }
 
 // 删除顺序表L中下标为p的元素
@@ -68,21 +81,22 @@ int deleteElem(Sqlist *L, int p, int *e) {
 }
 
 /*
+ * ---------------------------------------------------------------------------
  * 动态存储
  */
 #define InitSize 10
 typedef struct {
 	ElemType *data;
-	int length, MaxSize;
+	int length, MaxSize2;
 } SeqList;
 
 void InitList(SeqList *L) {
 	printf("------创建线性表------\n");
 	L->data = (ElemType*) malloc(sizeof(ElemType) * InitSize);
 	L->length = 0;
-	L->MaxSize = 50;
+	L->MaxSize2 = 50;
 	printf("线性表的当前个数: %d\n", L->length);
-	printf("线性表的最大容量: %d\n", L->MaxSize);
+	printf("线性表的最大容量: %d\n", L->MaxSize2);
 }
 
 // 将元素e插入到顺序表L中第i个位置
@@ -132,7 +146,7 @@ int LocateElem(SeqList L, ElemType e) {
 
 void PrintList(SeqList L) {
 	printf("------输出元素------\n");
-	for (int i = 0; i < L.length; i++) {
+	for (int i = 0; i < L.length; ++i) {
 		printf("%d ", L.data[i]);
 	}
 	printf("\n线性表的当前长度: %d\n", L.length);
