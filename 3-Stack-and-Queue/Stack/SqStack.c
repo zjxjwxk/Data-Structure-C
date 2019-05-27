@@ -17,7 +17,7 @@ void initStack(SqStack *st) {
 }
 
 int isEmpty(SqStack st) {
-	if(st.top == -1) {
+	if (st.top == -1) {
 		return 1;
 	} else {
 		return 0;
@@ -25,7 +25,7 @@ int isEmpty(SqStack st) {
 }
 
 int push(SqStack *st, int x) {
-	if(st->top == maxSize) {
+	if (st->top == maxSize) {
 		return 0;
 	}
 	st->data[++st->top] = x;
@@ -33,7 +33,7 @@ int push(SqStack *st, int x) {
 }
 
 int pop(SqStack *st, int *x) {
-	if(st->top == -1) {
+	if (st->top == -1) {
 		return 0;
 	}
 	*x = st->data[st->top--];
