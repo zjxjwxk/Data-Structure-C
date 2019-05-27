@@ -5,10 +5,8 @@
  * 双链表
  */
 
-typedef int Element;
-
 typedef struct DLNode {
-	Element data;
+	int data;
 	struct DLNode *prior;
 	struct DLNode *next;
 } DLNode;

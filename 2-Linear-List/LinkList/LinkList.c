@@ -5,10 +5,8 @@
  * 单链表
  */
 
-typedef int Element;
-
 typedef struct LNode {
-	Element data;
+	int data;
 	struct LNode *next;
 } LNode;
 

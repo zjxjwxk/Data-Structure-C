@@ -6,7 +6,6 @@
  * 顺序表
  */
 
-typedef int ElemType;
 #define MaxSize1 50 
 
 /*
@@ -86,13 +85,13 @@ int deleteElem(Sqlist *L, int p, int *e) {
  */
 #define InitSize 10
 typedef struct {
-	ElemType *data;
+	int *data;
 	int length, MaxSize2;
 } SeqList;
 
 void InitList(SeqList *L) {
 	printf("------创建线性表------\n");
-	L->data = (ElemType*) malloc(sizeof(ElemType) * InitSize);
+	L->data = (int*) malloc(sizeof(int) * InitSize);
 	L->length = 0;
 	L->MaxSize2 = 50;
 	printf("线性表的当前个数: %d\n", L->length);
@@ -100,7 +99,7 @@ void InitList(SeqList *L) {
 }
 
 // 将元素e插入到顺序表L中第i个位置
-bool ListInsert(SeqList *L, int i, ElemType e) {
+bool ListInsert(SeqList *L, int i, int e) {
 	printf("------插入元素------\n");
 	if (i < 1 || i > L->length + 1) {
 
@@ -116,7 +115,7 @@ bool ListInsert(SeqList *L, int i, ElemType e) {
 }
 
 // 删除顺序表L中第i个位置的元素
-bool ListDelete(SeqList *L, int i, ElemType *e) {
+bool ListDelete(SeqList *L, int i, int *e) {
 	printf("------删除元素------\n");
 	if (i < 1 || i > L->length) {
 		return false;
@@ -131,7 +130,7 @@ bool ListDelete(SeqList *L, int i, ElemType *e) {
 }
 
 // 查找顺序表中值为e的元素，如果查找成功，返回元素位序，否则返回0
-int LocateElem(SeqList L, ElemType e) {
+int LocateElem(SeqList L, int e) {
 	printf("------查找元素的位置------\n");
 	int i;
 	for (int i = 0; i < L.length; i ++) {
@@ -153,7 +152,7 @@ void PrintList(SeqList L) {
 }
 
 int main() {
-	ElemType e;
+	int e;
 	SeqList L;
 	InitList(&L);
 
