@@ -5,7 +5,13 @@
  * 链队
  */
 
-typedef struct LNode {
+typedef struct QNode {
 	int data;
-	struct LNode *next;
+	struct QNode *next;
 } LNode;
+
+typedef struct {
+	QNode *front;
+	QNode *rear;
+} LiQueue;
+
