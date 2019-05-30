@@ -43,6 +43,14 @@ int deQueue(SqQueue *qu, int *x) {
 	return 1;
 }
 
+void printQueue(SqQueue qu) {
+	int i;
+	for (i = qu.front + 1; i <= qu.rear; ++i) {
+		printf("%d ", qu.data[i]);
+	}
+	printf("\n");
+}
+
 int main() {
 	SqQueue qu;
 	initQueue(&qu);
@@ -51,8 +59,10 @@ int main() {
 	enQueue(&qu, 2);
 	enQueue(&qu, 3);
 	enQueue(&qu, 4);
+	printQueue(qu);
 	int x;
 	deQueue(&qu, &x);
 	printf("出队元素: %d\n", x);
+	printQueue(qu);
 	return 0;
 }
