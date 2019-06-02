@@ -44,7 +44,7 @@ int pop(LNode *lst, int *x) {
 }
 
 void printTop(LNode *lst) {
-	printf("栈顶元素: %d ", lst->next->data);
+	printf("栈顶元素: %d\n", lst->next->data);
 }
 
 int main() {
