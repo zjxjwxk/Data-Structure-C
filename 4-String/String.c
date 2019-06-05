@@ -10,6 +10,13 @@ typedef struct {
 	int length;
 } Str;
 
+Str newStr() {
+	Str str;
+	str.ch = NULL;
+	str.length = 0;
+	return str;
+}
+
 // 赋值操作
 int strassign(Str *str, char *ch) {
 	if (str->ch) {
@@ -118,18 +125,17 @@ int clearstring(Str *str) {
 }
 
 int main() {
-	Str str1;
+	Str str1 = newStr();
 	strassign(&str1, "Hello World! ");
 	printf("串: %s\n", str1.ch);
 	printf("串长度: %d\n", strlength(str1));
-	Str str2;
+	Str str2 = newStr();
 	strassign(&str2, "I'm Wxk");
 	printf("串比较结果: %d\n", strcompare(str1, str2));
-	Str str3;
+	Str str3 = newStr();
 	concat(&str3, str1, str2);
 	printf("串连接结果: %s\n", str3.ch);
-	Str substr;
-	substr.ch = NULL;
+	Str substr = newStr();
 	substring(&substr, str1, 6, 6);
 	printf("求子串结果: %s\n", substr.ch);
 	clearstring(&str1);
