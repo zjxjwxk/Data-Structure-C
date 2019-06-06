@@ -124,6 +124,25 @@ int clearstring(Str *str) {
 	return 1;
 }
 
+// 简单模式匹配算法
+int match(Str str, Str substr) {
+	int i = 0, j = 0, k = i;
+	while (i < str.length && j < substr.length) {
+		if (str.ch[i] == substr.ch[j]) {
+			++i;
+			++j;
+		} else {
+			j = 0;
+			i = ++k;
+		}
+	}
+	if (j >= substr.length) {
+		return k;
+	} else {
+		return -1;
+	}
+}
+
 int main() {
 	Str str1 = newStr();
 	strassign(&str1, "Hello World! ");
@@ -137,8 +156,9 @@ int main() {
 	printf("串连接结果: %s\n", str3.ch);
 	Str substr = newStr();
 	substring(&substr, str1, 6, 6);
-	printf("求子串结果: %s\n", substr.ch);
-	clearstring(&str1);
-	printf("串清空操作结果: str1.ch = %s\n", str1.ch);
+	printf("求子串位置结果: %s\n", substr.ch);
+	clearstring(&str2);
+	printf("串清空操作结果: str2.ch = %s\n", str2.ch);
+	printf("简单模式匹配结果: %d\n", match(str1, substr));
 	return 0;
 }
