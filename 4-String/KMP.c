@@ -5,6 +5,10 @@
  * 串
  */
 
+/*
+ * 字符存储在1～length的位置上
+ */
+
 typedef struct {
 	char *ch;
 	int length;
@@ -29,15 +33,16 @@ void getnext(Str substr, int next[]) {
 			j = next[j];
 		}
 	}
-	for (int i = 0; i < 8; ++i) {
-		printf("%d\n", next[i]);
-	}
 }
 
 int main() {
 	int next[8];
 	Str substr = newStr();
-	substr.ch = "ABABABB";
+	substr.ch = " ABABABB";
+	substr.length = 8;
 	getnext(substr, next);
+	for (int i = 1; i < 8; ++i) {
+		printf("%d\n", next[i]);
+	}
 	return 0;
 }
