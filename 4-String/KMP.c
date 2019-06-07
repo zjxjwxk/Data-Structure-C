@@ -35,14 +35,37 @@ void getnext(Str substr, int next[]) {
 	}
 }
 
+int KMP(Str str, Str substr, int next[]) {
+	int i = 1, j = 1;
+	while (i <= str.length && j <= substr.length) {
+		if (j == 0 || str.ch[i] == substr.ch[j]) {
+			++i;
+			++j;
+			printf("i = %d, j = %d\n", i, j);
+		} else {
+			j = next[j];
+			printf("j = %d\n", j);
+		}
+	}
+	if (j > substr.length) {
+		return i - substr.length;
+	} else {
+		return 0;
+	}
+}
+
 int main() {
 	int next[8];
 	Str substr = newStr();
 	substr.ch = " ABABABB";
-	substr.length = 8;
+	substr.length = 7;
 	getnext(substr, next);
 	for (int i = 1; i < 8; ++i) {
 		printf("%d\n", next[i]);
 	}
+	Str str = newStr();
+	str.ch = " ABABABABABBAB";
+	str.length = 13;
+	printf("KMP结果: %d\n", KMP(str, substr, next));
 	return 0;
 }
