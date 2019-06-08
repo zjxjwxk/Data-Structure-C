@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /*
- * 串
+ * KMP算法
  */
 
 /*
