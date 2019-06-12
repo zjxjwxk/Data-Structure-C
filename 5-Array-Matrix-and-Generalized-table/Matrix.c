@@ -3,6 +3,10 @@
 
 #define maxSize 10
 
+/*
+ * 矩阵
+ */
+
 // 矩阵转置
 void trsmat(int A[][5], int B[][4], int m, int n) {
 	for (int i = 0; i < m; ++i) {
