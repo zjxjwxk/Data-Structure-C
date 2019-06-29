@@ -3,6 +3,7 @@
 
 /*
  * 二叉树
+ * 链式存储结构
  */
 
 typedef struct BTNode {
@@ -11,7 +12,50 @@ typedef struct BTNode {
 	struct BTNode *rchild;
 } BTNode;
 
+void Visit(BTNode *p) {
+	printf("%c ", p->data);
+}
+
+// 前序遍历
+void preorder(BTNode *p) {
+	if (p != NULL) {
+		Visit(p);
+		preorder(p->lchild);
+		preorder(p->rchild);
+	}
+}
+
+// 中序遍历
+void inorder(BTNode *p) {
+	if (p != NULL) {
+		inorder(p->lchild);
+		Visit(p);
+		inorder(p->rchild);
+	}
+}
+
+// 后序遍历
+void postorder(BTNode *p) {
+	if (p != NULL) {
+		postorder(p->lchild);
+		postorder(p->rchild);
+		Visit(p);
+	}
+}
+
 int main() {
-	
+	BTNode *p1 = (BTNode*)malloc(sizeof(BTNode));
+	BTNode *p2 = (BTNode*)malloc(sizeof(BTNode));
+	BTNode *p3 = (BTNode*)malloc(sizeof(BTNode));
+	p1->data = '1';
+	p2->data = '2';
+	p3->data = '3';
+	p1->lchild = p2;
+	p1->rchild = p3;
+	p2->lchild = NULL;
+	p2->rchild = NULL;
+	p3->lchild = NULL;
+	p3->rchild = NULL;
+	preorder(p1);
 	return 0;
 }
