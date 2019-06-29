@@ -43,6 +43,18 @@ void postorder(BTNode *p) {
 	}
 }
 
+// 获得树的深度
+int getDepth(BTNode *p) {
+	int LD, RD;
+	if (p == NULL) {
+		return 0;
+	} else {
+		LD = getDepth(p->lchild);
+		RD = getDepth(p->rchild);
+		return (LD > RD ? LD : RD) + 1;
+	}
+}
+
 int main() {
 	BTNode *p1 = (BTNode*)malloc(sizeof(BTNode));
 	BTNode *p2 = (BTNode*)malloc(sizeof(BTNode));
@@ -57,5 +69,7 @@ int main() {
 	p3->lchild = NULL;
 	p3->rchild = NULL;
 	preorder(p1);
+	printf("\n");
+	printf("数的深度: %d\n", getDepth(p1));
 	return 0;
 }
