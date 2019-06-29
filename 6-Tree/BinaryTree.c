@@ -16,7 +16,7 @@ void Visit(BTNode *p) {
 	printf("%c ", p->data);
 }
 
-// 前序遍历
+// 先序遍历
 void preorder(BTNode *p) {
 	if (p != NULL) {
 		Visit(p);
@@ -55,6 +55,18 @@ int getDepth(BTNode *p) {
 	}
 }
 
+// 先序遍历
+void search(BTNode *p, BTNode **q, int key) {
+	if (p != NULL) {
+		if (p->data == key) {
+			*q = p;
+		} else {
+			search(p->lchild, q, key);
+			search(p->rchild, q, key);
+		}
+	}
+}
+
 int main() {
 	BTNode *p1 = (BTNode*)malloc(sizeof(BTNode));
 	BTNode *p2 = (BTNode*)malloc(sizeof(BTNode));
@@ -71,5 +83,8 @@ int main() {
 	preorder(p1);
 	printf("\n");
 	printf("数的深度: %d\n", getDepth(p1));
+	BTNode *q = NULL;
+	search(p1, &q, '4');
+	printf("查找值为2的元素: %c\n", q == NULL ? '\\' : q->data);
 	return 0;
 }
