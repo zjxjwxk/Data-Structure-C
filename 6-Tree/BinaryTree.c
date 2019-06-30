@@ -6,6 +6,8 @@
  * 链式存储结构
  */
 
+#define maxSize 3
+
 typedef struct BTNode {
 	char data;
 	struct BTNode *lchild;
@@ -67,6 +69,31 @@ void search(BTNode *p, BTNode **q, int key) {
 	}
 }
 
+// 层次遍历
+void level(BTNode *p) {
+	int front, rear;
+	BTNode *que[maxSize];
+	front = rear = 0;
+	BTNode *q;
+	if (p != NULL) {
+		rear = (rear + 1) % maxSize;
+		que[rear] = p;
+		while (front != rear) {
+			front = (front + 1) % maxSize;
+			q = que[front];
+			Visit(q);
+			if (q->lchild != NULL) {
+				rear = (rear + 1) % maxSize;
+				que[rear] = q->lchild;
+			}
+			if (q->rchild != NULL) {
+				rear = (rear + 1) % maxSize;
+				que[rear] = q->rchild;
+			}
+		}
+	}
+}
+
 int main() {
 	BTNode *p1 = (BTNode*)malloc(sizeof(BTNode));
 	BTNode *p2 = (BTNode*)malloc(sizeof(BTNode));
@@ -80,11 +107,12 @@ int main() {
 	p2->rchild = NULL;
 	p3->lchild = NULL;
 	p3->rchild = NULL;
-	preorder(p1);
+	printf("先序遍历: ");preorder(p1);
 	printf("\n");
 	printf("数的深度: %d\n", getDepth(p1));
 	BTNode *q = NULL;
 	search(p1, &q, '4');
 	printf("查找值为2的元素: %c\n", q == NULL ? '\\' : q->data);
+	printf("层次遍历: ");level(p1);
 	return 0;
 }
