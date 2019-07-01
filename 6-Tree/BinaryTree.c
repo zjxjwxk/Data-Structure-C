@@ -125,7 +125,7 @@ void inorderNonrecursion(BTNode *bt) {
 		int top = -1;
 		BTNode *p;
 		p = bt;
-		while (top != NULL || p != NULL) {
+		while (top != -1 || p != NULL) {
 			// 当p指向结点不为空时（可为左孩子或右孩子）
 			while (p != NULL) {
 				// 该结点入栈
@@ -164,9 +164,9 @@ int main() {
 	BTNode *q = NULL;
 	search(p1, &q, '2');
 	printf("查找值为2的元素: %c\n", q == NULL ? '\\' : q->data);
-	printf("层次遍历: ");level(p1);
-	printf("\n");
+	printf("层次遍历: ");level(p1);printf("\n");
 	printf("---非递归实现---\n");
-	printf("先序遍历: ");preorderNonrecursion(p1);
+	printf("先序遍历: ");preorderNonrecursion(p1);printf("\n");
+	printf("中序遍历: ");inorderNonrecursion(p1);printf("\n");
 	return 0;
 }
