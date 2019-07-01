@@ -57,7 +57,7 @@ int getDepth(BTNode *p) {
 	}
 }
 
-// 先序遍历
+// 查找data域为key的结点是否存在
 void search(BTNode *p, BTNode **q, int key) {
 	if (p != NULL) {
 		if (p->data == key) {
@@ -69,7 +69,7 @@ void search(BTNode *p, BTNode **q, int key) {
 	}
 }
 
-// 层次遍历
+// 层次遍历（队列实现）
 void level(BTNode *p) {
 	int front, rear;
 	BTNode *que[maxSize];
@@ -94,6 +94,57 @@ void level(BTNode *p) {
 	}
 }
 
+/*
+ * 非递归实现
+ */
+
+// 先序遍历（栈实现）
+void preorderNonrecursion(BTNode *bt) {
+	if (bt != NULL) {
+		BTNode *Stack[maxSize];
+		int top = -1;
+		BTNode *p;
+		Stack[++top] = bt;
+		while (top != -1) {
+			p = Stack[top--];
+			Visit(p);
+			if (p->rchild != NULL) {
+				Stack[++top] = p->rchild;
+			}
+			if (p->lchild != NULL) {
+				Stack[++top] = p->lchild;
+			}
+		}
+	}
+}
+
+// 中序遍历（栈实现）
+void inorderNonrecursion(BTNode *bt) {
+	if (bt != NULL) {
+		BTNode *Stack[maxSize];
+		int top = -1;
+		BTNode *p;
+		p = bt;
+		while (top != NULL || p != NULL) {
+			// 当p指向结点不为空时（可为左孩子或右孩子）
+			while (p != NULL) {
+				// 该结点入栈
+				Stack[++top] = p;
+				// 入栈后，p接着指向该结点左孩子
+				p = p->lchild;
+			}
+			// 直到p指向结点为空
+			if (top != -1) {
+				// 栈顶结点出栈
+				p = Stack[top--];
+				Visit(p);
+				// 出栈并访问栈顶结点后，p接着指向该结点右孩子
+				p = p->rchild;
+			}
+		}
+	}
+}
+
 int main() {
 	BTNode *p1 = (BTNode*)malloc(sizeof(BTNode));
 	BTNode *p2 = (BTNode*)malloc(sizeof(BTNode));
@@ -111,8 +162,11 @@ int main() {
 	printf("\n");
 	printf("数的深度: %d\n", getDepth(p1));
 	BTNode *q = NULL;
-	search(p1, &q, '4');
+	search(p1, &q, '2');
 	printf("查找值为2的元素: %c\n", q == NULL ? '\\' : q->data);
 	printf("层次遍历: ");level(p1);
+	printf("\n");
+	printf("---非递归实现---\n");
+	printf("先序遍历: ");preorderNonrecursion(p1);
 	return 0;
 }
