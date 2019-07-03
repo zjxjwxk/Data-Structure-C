@@ -145,6 +145,35 @@ void inorderNonrecursion(BTNode *bt) {
 	}
 }
 
+// 后序遍历（栈实现）
+void postorderNonrecursion(BTNode *bt) {
+	if (bt != NULL) {
+		// 定义两个栈
+		BTNode *Stack1[maxSize];
+		BTNode *Stack2[maxSize];
+		int top1 = -1;
+		int top2 = -1;
+		BTNode *p = NULL;
+		Stack1[++top1] = bt;
+		while (top1 != -1) {
+			// Stack1出栈，进入Stack2
+			p = Stack1[top1--];
+			Stack2[++top2] = p;
+			// 左孩子先入
+			if (p->lchild != NULL) {
+				Stack1[++top1] = p->lchild;
+			}
+			if (p->rchild != NULL) {
+				Stack1[++top1] = p->rchild;
+			}
+		}
+		while (top2 != -1) {
+			p = Stack2[top2--];
+			Visit(p);
+		}
+	}
+}
+
 int main() {
 	BTNode *p1 = (BTNode*)malloc(sizeof(BTNode));
 	BTNode *p2 = (BTNode*)malloc(sizeof(BTNode));
@@ -168,5 +197,6 @@ int main() {
 	printf("---非递归实现---\n");
 	printf("先序遍历: ");preorderNonrecursion(p1);printf("\n");
 	printf("中序遍历: ");inorderNonrecursion(p1);printf("\n");
+	printf("后序遍历: ");postorderNonrecursion(p1);printf("\n");
 	return 0;
 }
