@@ -46,6 +46,37 @@ void DFS(AGraph *G, int v) {
 	}
 }
 
+// 广度优先遍历
+void BFS(AGraph *G, int v, int visit[maxSize]) {
+	ArcNode *p;
+	int que[maxSize];
+	int front = 0;
+	int rear = 0;
+	int j = 0;
+	Visit(v);
+	visit[v] = 1;
+	// 顶点进队
+	rear = (rear + 1) % maxSize;
+	que[rear] = v;
+	while (front != rear) {
+		// 顶点出队
+		front = (front + 1) % maxSize;
+		j = que[front];
+		p = G->adjlist[j].firstarc;
+		// 当前邻接顶点未被访问，则进队
+		while (p != NULL) {
+			if (visit[p->adjvex] == 0) {
+				Visit(p->adjvex);
+				visit[p->adjvex] = 1;
+				// 该顶点进队
+				rear = (rear + 1) % maxSize;
+				que[rear] = p->adjvex;
+			}
+			p = p->nextarc;
+		}
+	}
+}
+
 int main() {
 	return 0;
 }
