@@ -8,6 +8,8 @@
 #define maxSize 10
 int visit[maxSize];
 
+/* ----------定义---------- */
+
 // 边表结点
 typedef struct ArcNode {
 	int adjvex; // 该边所指向的结点的位置
@@ -26,6 +28,8 @@ typedef struct {
 	VNode adjlist[maxSize];
 	int n, e;
 } AGraph;
+
+/* ----------方法---------- */
 
 // 访问结点
 void Visit(int v) {
