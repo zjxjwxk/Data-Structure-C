@@ -26,7 +26,7 @@ typedef struct {
 
 /* 最小生成树 */
 
-// 普里姆算法
+/* 普里姆算法 */
 void Prim(MGraph g, int v0, int *sum) {
 	int lowcost[maxSize];
 	int vset[maxSize];
@@ -60,6 +60,47 @@ void Prim(MGraph g, int v0, int *sum) {
 			if (vset[j] == 0 && g.edge[v][j] < lowcost[j]) {
 				lowcost[j] = g.edge[v][j];
 			}
+		}
+	}
+}
+
+/* 克鲁斯卡尔算法 */
+
+// Road结构体存放各边及所连接的两个顶点
+typedef struct {
+	int a, b; // 两个顶点
+	int w; // 边的权值
+} Road;
+
+Road road[maxSize];
+// 并查集数组
+int v[maxSize];
+
+// 在并查集中寻找根结点
+int getRoot(int a) {
+	while (a != v[a]) {
+		a = v[a];
+	}
+	return a;
+}
+
+// 克鲁斯卡尔算法
+void Kruskal(MGraph g, int *sum, Road road[]) {
+	int i;
+	int N, E, a, b;
+	N = g.n;
+	E = g.e;
+	(*sum) = 0;
+	for (i = 0; i < N; ++i) {
+		v[i] = i;
+	}
+	// sort(road); // 将road[]中各边按权值从小到大排序（排序算法未实现）
+	for (i = 0; i < E; ++i) {
+		a = getRoot(road[i].a);
+		b = getRoot(road[i].b);
+		if (a != b) {
+			v[a] = b;
+			(*sum) += road[i].w;
 		}
 	}
 }
