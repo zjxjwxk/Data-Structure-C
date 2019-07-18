@@ -24,9 +24,12 @@ typedef struct {
 
 /* ----------方法---------- */
 
-/* 最小生成树 */
+/* 
+ * 最小生成树
+ */
 
-/* 普里姆算法 */
+/* 1. Prim 普里姆算法 */
+
 void Prim(MGraph g, int v0, int *sum) {
 	int lowcost[maxSize];
 	int vset[maxSize];
@@ -64,7 +67,7 @@ void Prim(MGraph g, int v0, int *sum) {
 	}
 }
 
-/* 克鲁斯卡尔算法 */
+/* 2. Kruskal 克鲁斯卡尔算法 */
 
 // Road结构体存放各边及所连接的两个顶点
 typedef struct {
@@ -84,7 +87,7 @@ int getRoot(int a) {
 	return a;
 }
 
-// 克鲁斯卡尔算法
+// Kruskal 克鲁斯卡尔算法
 void Kruskal(MGraph g, int *sum, Road road[]) {
 	int i;
 	int N, E, a, b;
@@ -103,6 +106,32 @@ void Kruskal(MGraph g, int *sum, Road road[]) {
 			(*sum) += road[i].w;
 		}
 	}
+}
+
+/* 
+ * 最短路径
+ */
+
+// 1. Dijkstra 迪杰斯特拉算法
+
+// 输出源点到任何一个顶点最短路径上所经过的所有结点
+void printfPath(int path[], int a) {
+	int stack[maxSize];
+	int top = -1;
+	while (path[a] != -1) {
+		stack[++top] = a;
+		a = path[a];
+	}
+	stack[++top] = a;
+	while (top != -1) {
+		printf("%d ", stack[top--]);
+	}
+	printf("\n");
+}
+
+// Dijkstra 迪杰斯特拉算法
+void Dijkstra(MGraph g, int v, int dist[], int path) {
+	// TO DO
 }
 
 int main() {
