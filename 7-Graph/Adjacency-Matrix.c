@@ -6,6 +6,7 @@
  */
 
 #define maxSize 10
+#define INF 99999;
 
 /* ----------定义---------- */
 
@@ -45,7 +46,7 @@ void Prim(MGraph g, int v0, int *sum) {
 	(*sum) = 0;
 	// 将其余顶点并入树中
 	for (i = 0; i < g.n - 1; ++i) {
-		min = 99999;
+		min = INF;
 		// 选出当前结点候选边中的最小者
 		for (j = 0; j < g.n; ++j) {
 			if (vset[j] == 0 && lowcost[j] < min) {
@@ -131,7 +132,21 @@ void printfPath(int path[], int a) {
 
 // Dijkstra 迪杰斯特拉算法
 void Dijkstra(MGraph g, int v, int dist[], int path) {
-	// TO DO
+	int set[maxSize];
+	int min, i, j, u;
+	// 对各数组进行初始化
+	for (i = 0; i < g.n; ++i) {
+		dist[i] = g.edge[v][i];
+		set[i] = 0;
+		if (g.edge[v][i] < INF) {
+			path[i] = v;
+		} else {
+			path[i] = -1;
+		}
+	}
+	set[v] = 1;
+	path[v] = -1;
+	// 关键操作开始
 }
 
 int main() {
