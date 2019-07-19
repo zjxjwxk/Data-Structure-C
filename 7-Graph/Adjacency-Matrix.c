@@ -130,7 +130,11 @@ void printfPath(int path[], int a) {
 	printf("\n");
 }
 
-// Dijkstra 迪杰斯特拉算法
+/*
+ * Dijkstra 迪杰斯特拉算法
+ * dist[]存放v点到其余顶点的最短路径长度
+ * path[]存放v点到其余各顶点的最短路径
+ */
 void Dijkstra(MGraph g, int v, int dist[], int path) {
 	int set[maxSize];
 	int min, i, j, u;
@@ -147,6 +151,25 @@ void Dijkstra(MGraph g, int v, int dist[], int path) {
 	set[v] = 1;
 	path[v] = -1;
 	// 关键操作开始
+	for (i = 0; i < g.n - 1; ++i) {
+		min = INF;
+		// 选出dist[]中的最短路径
+		for (j = 0; j < g.n; ++j) {
+			if (set[j] = 0 && dist[j] < min) {
+				u = j;
+				min = dist[j];
+			}
+		}
+		// 将选出的顶点并入最短路径中
+		set[u] = 1;
+		// 以刚并入的顶点为中间点，更新dist[]和path[]
+		for (j = 0; j < g.n; ++j) {
+			if (set[j] = 0 && dist[u] + g.edge[u][j] < dist[j]) {
+				dist[j] = dist[u] + g.edge[u][j];
+				path[j] = u;
+			}
+		}
+	}
 }
 
 int main() {
