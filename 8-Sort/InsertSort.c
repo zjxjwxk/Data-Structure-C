@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+ * 插入排序
+ */
+
 void InsertSort(int R[], int n) {
 	int i, j;
 	int temp;
